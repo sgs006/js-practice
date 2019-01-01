@@ -69,6 +69,7 @@ xwing.calculateAge();
 //Object.create
 //Allows us to specify directly which object should be a prototype that others
 //inherit from.
+/*
 var personProto = {
   calculageAge: function() {
     console.log(2016 - this.yearOfBirth);
@@ -85,3 +86,46 @@ var jane = Object.create(personProto, {
   yearOfBirth: { value: 1969 },
   job: { value: "designer" }
 });
+*/
+
+//Primitives vs objects
+
+//Primatives
+//each variable holds a copy of the data. They don't reference anything.
+//b is being set to the value of a. It is not referencing a, but copying its value.
+var a = 23;
+var b = a;
+a = 46;
+console.log(a);
+console.log(b);
+
+//Objects
+var obj1 = {
+  name: "John",
+  age: 26
+};
+
+//when we set obj2 = obj1 we are creating a reference ot obj1, not a new obj.
+var obj2 = obj1;
+obj1.age = 30;
+console.log(obj1.age);
+console.log(obj2.age);
+
+//Functions
+var age = 27;
+var obj = {
+  name: "Jonas",
+  city: "Lisbon"
+};
+
+//We see here that the function will not change the value of age but will change
+//the vaule of city in obj. This points out the difference between primitives and objects.
+function change(a, b) {
+  a = 30;
+  b.city = "San Francisco";
+}
+
+change(age, obj);
+
+console.log(age);
+console.log(obj.city);
