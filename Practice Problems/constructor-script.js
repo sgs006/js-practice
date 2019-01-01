@@ -1,5 +1,5 @@
 //Function constructor
-
+/*
 var john = {
   name: "John",
   yearOfBirth: 1990,
@@ -64,3 +64,24 @@ var xwing = new StarWars("x-wing", "snub fighter", 20);
 
 console.log(xwing.type);
 xwing.calculateAge();
+*/
+
+//Object.create
+//Allows us to specify directly which object should be a prototype that others
+//inherit from.
+var personProto = {
+  calculageAge: function() {
+    console.log(2016 - this.yearOfBirth);
+  }
+};
+
+var john = Object.create(personProto);
+john.name = "John";
+john.yearOfBirth = 1990;
+john.job = "teacher";
+
+var jane = Object.create(personProto, {
+  name: { value: "Jane" },
+  yearOfBirth: { value: 1969 },
+  job: { value: "designer" }
+});
