@@ -22,6 +22,12 @@ Person.prototype.calculateAge = function() {
   console.log(2016 - this.yearOfBirth);
 };
 
+//Prototype inheritence can work for properties as well.
+// However, this is used less commonly. This is just an example to
+// show it in acction.
+
+Person.prototype.lastName = "Smith";
+
 //instantiation, instance of contructor function
 var john = new Person("John", 1990, "teacher");
 
@@ -37,3 +43,7 @@ var mark = new Person("Mark", 1948, "retired");
 john.calculateAge();
 jane.calculateAge();
 mark.calculateAge();
+
+console.log(john.lastName);
+console.log(jane.lastName);
+console.log(mark.lastName);
