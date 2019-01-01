@@ -47,3 +47,20 @@ mark.calculateAge();
 console.log(john.lastName);
 console.log(jane.lastName);
 console.log(mark.lastName);
+
+//My own practice constructor function
+
+var StarWars = function(ship, type, shipConDate) {
+  this.ship = ship;
+  this.type = type;
+  this.shipConDate = shipConDate;
+};
+
+StarWars.prototype.calculateAge = function() {
+  console.log(55 - this.shipConDate);
+};
+
+var xwing = new StarWars("x-wing", "snub fighter", 20);
+
+console.log(xwing.type);
+xwing.calculateAge();
