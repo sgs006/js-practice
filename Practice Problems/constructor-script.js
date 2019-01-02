@@ -93,6 +93,7 @@ var jane = Object.create(personProto, {
 //Primatives
 //each variable holds a copy of the data. They don't reference anything.
 //b is being set to the value of a. It is not referencing a, but copying its value.
+/*
 var a = 23;
 var b = a;
 a = 46;
@@ -129,3 +130,24 @@ change(age, obj);
 
 console.log(age);
 console.log(obj.city);
+*/
+
+/////////////////////////////////////////////////////
+// Lecture: Passing functions as arguments
+
+var years = [1990, 1965, 1937, 2005, 1998];
+
+function arrayCalc(arr, fn) {
+  var arrRes = [];
+  arr.forEach(function(el) {
+    arrRes.push(fn(el));
+  });
+  return arrRes;
+}
+
+function calculateAge(el) {
+  return 2016 - el;
+}
+
+var ages = arrayCalc(years, calculateAge);
+console.log(ages);
