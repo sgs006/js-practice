@@ -153,8 +153,63 @@ function isFullAge(el) {
   return el >= 18;
 }
 
+function maxHeartRate(el) {
+  if (el >= 18 && el <= 81) {
+    return Math.round(206.9 - 0.67 * el);
+  } else {
+    return -1;
+  }
+}
+
 var ages = arrayCalc(years, calculateAge);
 var fullAges = arrayCalc(ages, isFullAge);
+var rates = arrayCalc(ages, maxHeartRate);
 
 console.log(ages);
 console.log(fullAges);
+console.log(rates);
+
+//lessons learned: in this case we used callbacks and created variables to hold our functions.
+//By creating a generic function with the arrayCalc function we were able to mainpulate the years array
+//using callback functions. From there we are able to manipulate new returned arrays with different functions
+//such as the isFullAge and maxHeartRate functions. All of this work makes our code more modular and
+//readable. If we had done all of this in one large function it would be harder to read, but also harder
+//to change later if we needed to for some reason. It is better to have the smaller broken up functions.
+
+/////////////////////////////
+//Lecture: Functions returning functions
+
+function interviewQuestion(job) {
+  if (job === "designer") {
+    return function(name) {
+      console.log(name + ", can you please explain what UX design is?");
+    };
+  } else if (job === "teacher") {
+    return function(name) {
+      console.log("What subject do you teach, " + name + "?");
+    };
+  } else {
+    return function(name) {
+      console.log("Hello " + name + ", what do you do?");
+    };
+  }
+}
+
+var teacherQuestion = interviewQuestion("teacher");
+var designerQuestion = interviewQuestion("designer");
+
+teacherQuestion("John");
+designerQuestion("John");
+designerQuestion("Jane");
+designerQuestion("Mark");
+
+interviewQuestion("teacher")("Mark"); //works because JS evaluates left to right.
+
+//Lessons Learned: JavaScript uses First Class Functions. We can return functions from functions.
+//We created a generic function with interviewQuestion() which returns a function
+//based on the string argument passed to it. We can then call that returned function
+//to do interesting things. For example, we created a var teacherQuestion which ill
+//invoke the interviewQuestion with the 'teacher' string argument. This will rturn a function
+//which is stored in the varialbe teacherQuestion. We can then invoke teacherQuestion and give it
+//a 'name' argument to put in the console.log string that the new function returns.
+//This is all to show that functions can return functions which can be used in intersting ways.
