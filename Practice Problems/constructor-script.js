@@ -213,3 +213,27 @@ interviewQuestion("teacher")("Mark"); //works because JS evaluates left to right
 //which is stored in the varialbe teacherQuestion. We can then invoke teacherQuestion and give it
 //a 'name' argument to put in the console.log string that the new function returns.
 //This is all to show that functions can return functions which can be used in intersting ways.
+
+////////////////////////////////////////////////////////
+// Lecture: IIFE
+
+//function is trying to create a private variable to store score for a simple game.
+function game() {
+  var score = Math.random() * 10;
+  console.log(score >= 5);
+}
+game();
+
+//Same function as above written as an IIFE.
+(function() {
+  var score = Math.random() * 10;
+  console.log(score >= 5);
+})();
+
+//Passing argument in IIFE.
+(function(goodLuck) {
+  var score = Math.random() * 10;
+  console.log(score >= 5 - goodLuck);
+})(5);
+
+//Lessons Learned: IIFE function creates data privacy. Can't be accessed outside the function.
