@@ -299,3 +299,93 @@ function interviewQuestion(job) {
 }
 
 interviewQuestion("teacher")("John");
+
+//////////////////////////////
+// Lecture: Bind, call and apply
+
+var john = {
+  name: "John",
+  age: 26,
+  job: "teacher",
+  presentation: function(style, timeOfDay) {
+    if (style === "formal") {
+      console.log(
+        "Good " +
+          timeOfDay +
+          ", Ladies and gentlemen! I'm a " +
+          this.name +
+          ", I'm a " +
+          this.job +
+          ", and I'm " +
+          this.age +
+          " years old."
+      );
+    } else if (style === "friendly") {
+      console.log(
+        "Hey! What's up? I'm " +
+          this.name +
+          ", I'm a " +
+          this.job +
+          ", and I'm " +
+          this.age +
+          " years old. Have a nice " +
+          timeOfDay +
+          "."
+      );
+    }
+  }
+};
+
+var emily = {
+  name: "Emily",
+  age: 35,
+  job: "designer"
+};
+
+john.presentation("formal", "morning");
+
+//Method borrowing and call method
+john.presentation.call(emily, "friendly", "afternoon");
+
+//Won't work, but shows how to use apply which uses arrays.
+//john.presentation.apply(emily, ["friendly", "afternoon"]);
+
+//bind returns a function. So we only do the friendly argument after setting the this to john in the first argument on bind.
+//bind allows us to preset a parameter, basically creating a function based on another function.
+var johnFriendly = john.presentation.bind(john, "friendly");
+
+johnFriendly("morning");
+johnFriendly("night");
+
+var emilyFormal = john.presentation.bind(emily, "formal");
+emilyFormal("afternoon");
+
+//Using old code in a new way to show the power of .bind. The main change will be
+//adding a limit check to ifFullAge and the .bind to utilize the new two argument function.
+var years = [1990, 1965, 1937, 2005, 1998];
+
+function arrayCalc(arr, fn) {
+  var arrRes = [];
+  arr.forEach(function(el) {
+    arrRes.push(fn(el));
+  });
+  return arrRes;
+}
+
+function calculateAge(el) {
+  return 2016 - el;
+}
+
+//refactored function to set the age 'limit' argument and check if it is >= our age (el).
+function isFullAge(limit, el) {
+  return el >= limit;
+}
+
+var ages = arrayCalc(years, calculateAge);
+
+//Since the arrayCalc callback fn function only takes one parameter we need to use .bind on
+//isFullAge to set the limit argument. So when fullJapan is called it will run the
+//arrayCalc function with the ages array and the isFullAge function with limit set to 20.
+var fullJapan = arrayCalc(ages, isFullAge.bind(this, 20));
+console.log(ages);
+console.log(fullJapan);
