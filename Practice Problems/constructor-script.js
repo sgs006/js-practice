@@ -389,3 +389,63 @@ var ages = arrayCalc(years, calculateAge);
 var fullJapan = arrayCalc(ages, isFullAge.bind(this, 20));
 console.log(ages);
 console.log(fullJapan);
+
+/////////////////////////////////////////////
+// Quiz Game Challenge
+
+(function() {
+  let currentScore = 0;
+  //Constructor
+  function Question(question, answers, correct) {
+    this.question = question;
+    this.answers = answers;
+    this.correct = correct;
+  }
+  //Contructor functions
+  let question_1 = new Question("Are you happy?", ["0: yes", "1: no"], 0);
+  let question_2 = new Question("1+1 = 2?", ["0: yes", "1: no"], 0);
+  let question_3 = new Question(
+    "How much wood could a woodchuck chuck if a woodchuck could chuck wood?",
+    ["0: Enough", "1: IDK", "2: 752"],
+    0
+  );
+
+  //array to hold questions
+  let arrQuestion = [question_1, question_2, question_3];
+
+  //Function to grab and display random question
+  Question.prototype.display = function() {
+    console.log(this.question + "\n" + this.answers.join("\n"));
+  };
+
+  //Creates prompt and checks if question is correct, then restarts game.
+  Question.prototype.correctAnswer = function(ans) {
+    if (ans === this.correct) {
+      console.log("By George, I think you've got it");
+      currentScore++;
+    } else {
+      console.log("So so so so wrong");
+    }
+    console.log(
+      "Your score is " +
+        currentScore +
+        "\n----------------------------------------"
+    );
+  };
+
+  function nextQuestion() {
+    let randomSelection = Math.floor(Math.random() * arrQuestion.length);
+
+    arrQuestion[randomSelection].display();
+
+    let aNumber = window.prompt(
+      "Please select the correct answer (just type the number) or type exit to end game"
+    );
+    if (aNumber !== "exit") {
+      arrQuestion[randomSelection].correctAnswer(parseInt(aNumber));
+      nextQuestion();
+    }
+  }
+
+  nextQuestion();
+})();
