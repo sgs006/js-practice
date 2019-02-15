@@ -86,3 +86,22 @@ console.log(i);
 
 //let for variables that can change over time
 //const for variables that remain constant
+
+
+//////////////////////////////////////////////
+// Lecture : Blocks and IIFEs
+
+//ES6 example of IIFE
+{
+    const a = 1;
+    let b = 2;
+    var c = 3;
+}
+
+console.log(a + b) //throws error because they are block scope
+//this is how you write and IFFE in ES6.
+console.log(c); //works beause var is function scopped 
+//ES5 example of IFFE
+(function () {
+    var c = 3;
+})();
