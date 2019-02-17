@@ -105,3 +105,4 @@ console.log(c); //works beause var is function scopped
 (function () {
     var c = 3;
 })();
+
