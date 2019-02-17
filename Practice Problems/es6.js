@@ -155,3 +155,85 @@ ages6 = years.map((el, index) => {
     return `Age element ${index + 1}: ${age}.`;
 });
 console.log(ages6);
+
+////////////////////////////////////////////////
+// Lecture : Arrow Functions 2
+
+//arrow functions do not have a this keyword, they use the this keyword of the function they are written in. This is called a lexical this variable. 
+
+//ES5
+var box5 = {
+    color: 'green',
+    position: 1,
+    clickMe: function () {
+        //The this keyword in this function would point to the box5 object. It works because this function is a method
+        var self = this; //This variable is a hack that allows us to have access to the this keyword in future functions within this method whose this keywords would point to the window object and not box5 object
+        document.querySelector('.green').addEventListener('click', function () {
+            var str = ' This is box number ' + self.position + ' and it is ' + self.color;
+            alert(str);
+            //The this keyword in this function points to the window object and not the box5 object. That is why we have to use the self hack above. 
+        });
+    }
+}
+//box5.clickMe();
+
+//ES6
+const box6 = {
+    color: 'green',
+    position: 1,
+    clickMe: function () {
+        document.querySelector('.green').addEventListener('click', () => {
+            var str = ' This is box number ' + this.position + ' and it is ' + this.color;
+            alert(str);
+            //Arrow functions use the surrounding this keyword. 
+
+            //Always use arrow functions when you need to preserve the value of the this keyword. 
+
+        });
+    }
+}
+box6.clickMe();
+
+//Be careful with arrow functions so you don't lose track of what the this keyword points to. 
+// const box66 = {
+//     color: 'green',
+//     position: 1,
+//     clickMe: () => {
+//         //By making the method an arrow function I'm pointing the this keyword to the global scope. Now I won't get my desired results.
+//         document.querySelector('.green').addEventListener('click', () => {
+//             var str = ' This is box number ' + this.position + ' and it is ' + this.color;
+//             alert(str);
+//         });
+//     }
+// }
+// box66.clickMe();
+
+function Person(name) {
+    this.name = name;
+}
+
+//ES5
+// Person.prototype.myFriends5 =
+//     function (friends) {
+//         var arr = friends.map(function (el) {
+
+//             return this.name + ' is friends with ' + el;
+//             //Again the this keyword in here points to global object and not the Person object since it is not a method. 
+//         }.bind(this));
+//         console.log(arr);
+//     }
+
+// //var friends = ['Bob', 'Jane', 'Mark'];
+// new Person('John').myFriends5(friends);
+
+//ES6
+Person.prototype.myFriends6 =
+    function (friends) {
+        var arr = friends.map(el =>
+            `${this.name} is friends with ${el}`);
+        console.log(arr);
+    }
+
+
+let friends = ['Bob', 'Jane', 'Mark'];
+new Person('John').myFriends6(friends);
