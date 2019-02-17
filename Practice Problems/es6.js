@@ -106,3 +106,27 @@ console.log(c); //works beause var is function scopped
     var c = 3;
 })();
 
+//////////////////////////////////////////////
+// Lecture: Strings 
+
+let firstName = 'John';
+let lastName = 'Smith';
+const yearOfBirth = 1990;
+function calcAge(year) {
+    return 2016 - year;
+}
+
+//ES5
+console.log('This is ' + firstName + ' ' + lastName + '. He was born  in ' + yearOfBirth + '. Today, he is ' + calcAge(yearOfBirth) + ' years old.');
+
+//ES6
+//Backticks make this easier!
+console.log(`This is ${firstName} ${lastName}. He was born in ${yearOfBirth}. Today he is ${calcAge(yearOfBirth)} years old.`);
+
+
+//useful methods
+const n = `${firstName} ${lastName}`;
+console.log(n.startsWith('J'));
+console.log(n.endsWith('h'));
+console.log(n.includes('oh'));
+console.log(`${firstName} `.repeat(5));
