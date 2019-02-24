@@ -357,3 +357,50 @@ const boxes = document.querySelectorAll('.box');
 const all = [h, ...boxes];
 
 Array.from(all).forEach(cur => cur.style.color = 'purple');
+
+///////////////////////////////////////////////////////
+// Lecture: Rest Parameters
+
+//Rest parameter takes single values and transforms them into arrays. 
+
+//ES5 
+/*function isFullAge5() {
+    //console.log(arguments);
+    var argsArr = Array.prototype.slice.call(arguments);
+
+    argsArr.forEach(function (cur) {
+        console.log((2016 - cur) >= 18);
+    })
+}
+
+//isFullAge5(1990, 1999, 1965);
+
+//ES6
+function isFullAge6(...years) {
+    years.forEach(cur => console.log((2016 - cur) >= 18));
+}
+isFullAge6(1990, 1999, 1965);
+isFullAge6(1990, 1999, 1965, 2016, 1995, 1955);
+*/
+
+//spread operator is used in function call and rest operator is used in the function decleration to accept an arbitrary number of parameters. 
+
+
+//ES5 
+function isFullAge5(limit) {
+    //The 1 is telling this to start cutting the array at position 1 ignoring index 0 which will be the limit argument
+    var argsArr = Array.prototype.slice.call(arguments, 1);
+
+    argsArr.forEach(function (cur) {
+        console.log((2016 - cur) >= limit);
+    })
+}
+
+//isFullAge5(1990, 1999, 1965);
+
+//ES6
+function isFullAge6(limit, ...years) {
+    years.forEach(cur => console.log((2016 - cur) >= limit));
+}
+isFullAge6(16, 1990, 1999, 1965);
+isFullAge6(16, 1990, 1999, 1965, 2016, 1995, 1955);
