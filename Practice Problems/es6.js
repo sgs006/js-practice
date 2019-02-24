@@ -404,3 +404,39 @@ function isFullAge6(limit, ...years) {
 }
 isFullAge6(16, 1990, 1999, 1965);
 isFullAge6(16, 1990, 1999, 1965, 2016, 1995, 1955);
+
+
+////////////////////////////////////////////////////////
+// Lecture: Default Parameters
+
+
+//ES5
+/*
+function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
+    //adding default parameters
+    lastName === undefined ? lastName = 'Smith' : lastName = lastName;
+    nationality === undefined ? nationality = 'American' : nationality = nationality;
+
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.yearOfBirth = yearOfBirth;
+    this.nationality = nationality;
+}
+var john = new SmithPerson('John', 1990);
+//overriding defaults
+var emily = new SmithPerson('Emily', 1983, 'Diaz', 'Spanish');
+*/
+
+//ES6
+
+//Can specify defaults in parameters without if statements for ternary operators. 
+function SmithPerson(firstName, yearOfBirth, lastName = 'Smith', nationality = 'American') {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.yearOfBirth = yearOfBirth;
+    this.nationality = nationality;
+}
+
+let john = new SmithPerson('John', 1990);
+//overriding defaults
+let emily = new SmithPerson('Emily', 1983, 'Diaz', 'Spanish');
